@@ -25,7 +25,9 @@
 # ── identity ────────────────────────────────────────────────────────────────
 
 # The preset's own persona, shadowing the deployment default for this agent.
-# `{{model}}` and `{{cwd}}` resolve from the agent's own route and workspace.
+# `{{model}}` 由宿主按 agent 自己的路由替换；工作目录改由 runtime context 给出。
+# 注意：不要在这里写 `{{cwd}}` —— 宿主 0.2.1-alpha.2 起不再注册该变量，
+# 未注册变量会让 assemble 抛 UNKNOWN，整轮在调用模型前就失败。
 - id: persona
   name: '@deepseek-ai/dsh-persona'
   config:

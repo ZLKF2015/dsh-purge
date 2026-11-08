@@ -28,7 +28,9 @@
   config:
     includeHarnessIdentity: false
     personaPrefix: ""
-    personaSuffix: Your working directory is {{cwd}}.
+    # 后缀里不能出现 {{cwd}}：宿主 0.2.1-alpha.2 起只注册 provider / model，
+    # 未注册变量会让 assemble 直接抛错，整轮对话在调用模型前就失败。
+    personaSuffix: The workspace directory is provided by the runtime context; resolve relative paths against it.
 
 - id: dsh-purge
   inject: [systemPrompt, tools]
